@@ -1,0 +1,14 @@
+.layout-container {
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  .content {
+    flex: 1;
+    margin-left: 6rem; /* 4rem (left-4) + 5rem (w-20 ≈ 80px) */
+    padding: 2rem;
+    background: white;
+    overflow-y: auto;
+  }
+  

@@ -1,0 +1,10 @@
+<p class="text-3xl font-bold text-[#4E505A] mb-5">Bienvenido a Order Track</p>
+
+
+<div class="mb-3 mt-5 justify-left">
+    <form [formGroup]="formGroup">
+        <p-selectbutton size="small" [options]="stateOptions" formControlName="value" optionLabel="label" optionValue="value" />
+    </form>
+</div>
+
+<app-bar-chart></app-bar-chart>
