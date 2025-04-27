@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { BaseService } from '../../../services/base.service'; // Importa el servicio
 import { map } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./bar-chart.component.css']
 })
 export class BarChartComponent implements OnInit {
-
+  @Input() time = 'semana';
   basicData: any;
   basicOptions: any;
 
@@ -22,12 +22,17 @@ export class BarChartComponent implements OnInit {
   ngOnInit() {
     this.obtenerDatosAgrupados();
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['time']) {
+      // Si el valor de 'time' cambia, volvemos a obtener los datos
+      this.obtenerDatosAgrupados();
+    }
+  }
   obtenerDatosAgrupados() {
     const filtro = {
       FechaInicio: new Date('2025-01-01'),  // Define las fechas de inicio y fin
       FechaFin: new Date('2025-12-31'),
-      TipoAgrupacion: 'semana'  // Cambia esto según lo que desees
+      TipoAgrupacion: this.time  // Cambia esto según lo que desees
     };
   
     this.productosService.obtenerProductosAgrupados(filtro)
@@ -35,7 +40,7 @@ export class BarChartComponent implements OnInit {
         map((agrupados: any) => {
           console.log('Datos brutos:', agrupados);
         
-          const agrupaciones = agrupados?.data?.[0]; // Array de objetos agrupados por mes
+          const agrupaciones = agrupados?.data; // Array de objetos agrupados por mes
         
           if (!Array.isArray(agrupaciones)) {
             console.error('Los datos no son válidos');

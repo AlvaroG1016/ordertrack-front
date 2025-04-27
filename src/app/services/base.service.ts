@@ -12,4 +12,7 @@ export class BaseService {
   obtenerProductosAgrupados(filtro: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/Producto/ObtenerProductosAgrupados`, filtro);
   }
+  obtenerProductosUtilidadOverView(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/Producto/GetProductosUtilidad`);
+  }
 }

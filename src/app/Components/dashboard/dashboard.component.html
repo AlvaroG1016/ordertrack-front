@@ -1,10 +1,37 @@
 <p class="text-3xl font-bold text-[#4E505A] mb-5">Bienvenido a Order Track</p>
 
-
-<div class="mb-3 mt-5 justify-left">
+<div class="parent">
+  <div class="div1 mb-8"   >
     <form [formGroup]="formGroup">
-        <p-selectbutton size="small" [options]="stateOptions" formControlName="value" optionLabel="label" optionValue="value" />
+      <!-- Aquí se mantiene el p-selectbutton y el formulario -->
+      <p-selectbutton 
+        [options]="stateOptions" 
+        formControlName="time" 
+        optionLabel="label" 
+        optionValue="value" 
+        size="small" 
+        class="mb-3" 
+      />
+      
+      <div class="shadow-sm rounded-xl p-8 border-solid border border-gray-200 max-h-[60vh] min-h-[30vh]">
+        <app-bar-chart [time]="formGroup.get('time')?.value"></app-bar-chart>
+      </div>
     </form>
+    
+  </div>
+  <div class="div2">
+    <div class="shadow-sm rounded-xl p-8 border border-gray-200 w-full flex flex-col max-h-[60vh] min-h-[50vh]">
+      <app-datatable
+        [columns]="cols"
+        [endpoint]="'https://localhost:7038/api/Producto/GetDatatableProductos'"
+        [selectionMode]="'single'"
+        (rowClick)="handleRowClick($event)"
+      ></app-datatable>
+    </div>
+  </div>
+  <div class="div3">
+    <div class="shadow-sm rounded-xl p-8 border border-gray-200 w-full flex flex-col max-h-[60vh] min-h-[58vh]">
+      <app-meter-group></app-meter-group>
+      </div>
+  </div>
 </div>
-
-<app-bar-chart></app-bar-chart>

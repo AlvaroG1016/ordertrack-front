@@ -9,6 +9,8 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { LayoutComponent } from './Components/layout/layout.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { BarChartComponent } from './Components/controls/bar-chart/bar-chart.component';
+import { DatatableComponent } from './Components/controls/datatable/datatable.component';
+import { MeterGroupComponent } from './Components/controls/meter-group/meter-group.component';
 
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -24,6 +26,14 @@ import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { ChartModule } from 'primeng/chart';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { TableModule } from 'primeng/table';
+import {MeterGroupModule } from 'primeng/metergroup';
+
+
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 
 
 @NgModule({
@@ -33,6 +43,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     LayoutComponent,
     DashboardComponent,
     BarChartComponent,
+    DatatableComponent,
+    MeterGroupComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +57,13 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     ButtonModule,
     ChartModule,
     SelectButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    InputIconModule,
+    IconFieldModule,
+    InputTextModule,
+    MeterGroupModule,
+    
   ],
   providers: [   
     provideAnimationsAsync(),

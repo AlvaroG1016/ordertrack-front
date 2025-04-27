@@ -16,10 +16,18 @@ export class DashboardComponent {
       { label: 'Mes', value: 'mes' }
   ];
 
+  cols = [
+    { field: 'nombre', header: 'Nombre', sortable: true },
+    { field: 'sku', header: 'SKU' ,  sortable: false },
+    { field: 'idProductoExcel', header: 'Excel ID',  sortable: false  }
+  ]
+
   ngOnInit() {
       this.formGroup = new FormGroup({
-          value: new FormControl('semana')
+          time: new FormControl('semana')
       });
   }
-
+  handleRowClick(a:any){
+    
+  }
 }

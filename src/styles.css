@@ -3,3 +3,11 @@
 *{
     font-family: sans-serif;
 }
+    
+.p-datatable .p-overlay-mask{
+    background-color: transparent !important;
+  
+}
+.p-datatable-loading-icon{
+    color: #2B7FFF;
+}
