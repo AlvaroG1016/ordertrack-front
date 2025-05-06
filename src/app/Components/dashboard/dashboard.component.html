@@ -25,13 +25,14 @@
         [columns]="cols"
         [endpoint]="'https://localhost:7038/api/Producto/GetDatatableProductos'"
         [selectionMode]="'single'"
-        (rowClick)="handleRowClick($event)"
+        (selectionChange)="onRowSeleccionado($event)"
+        dataKey="idProducto"
       ></app-datatable>
     </div>
   </div>
   <div class="div3">
-    <div class="shadow-sm rounded-xl p-8 border border-gray-200 w-full flex flex-col max-h-[60vh] min-h-[58vh]">
-      <app-meter-group></app-meter-group>
+    <div class="shadow-sm rounded-xl p-8 border border-gray-200 w-full flex flex-col max-h-[58vh] min-h-[58vh]">
+      <app-meter-group [value]="asdsa" class="max-h-[58vh]  overflow-y-scroll"></app-meter-group>
       </div>
   </div>
 </div>

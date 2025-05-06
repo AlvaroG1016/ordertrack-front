@@ -13,15 +13,15 @@ export class DatatableComponent<T> {
   @Input() columns!: { field: string; header: string; sortable:boolean }[];
   @Input() endpoint!: string;
   @Input() dataKey: string = 'id';
-  @Input() selectionMode: 'single' | 'multiple' = 'single'; // ✅ permite alternar simple/múltiple
-
-  @Output() rowClick = new EventEmitter<T | T[]>(); // ✅ emite uno o varios elementos
+  @Input() selectionMode: 'single' | 'multiple' = 'single';
+  @Output() rowClick = new EventEmitter<T | T[]>(); 
+  @Output() selectionChange = new EventEmitter<T>();
 
   data: T[] = [];
   totalRecords = 0;
   loading = false;
   searchTerm = '';
-
+  selectedItem!: T;
   constructor(private readonly http: HttpClient) {}
 
   loadLazy(event: TableLazyLoadEvent) {
@@ -54,12 +54,8 @@ export class DatatableComponent<T> {
     this.loadLazy({ first: 0, rows: 10 } as TableLazyLoadEvent);
   }
 
-  onRowSelectHandler(event: any) {
-    // ✅ siempre emite T o T[], según selectionMode
-    if (this.selectionMode === 'multiple') {
-      this.rowClick.emit(event.data);
-    } else {
-      this.rowClick.emit(Array.isArray(event.data) ? event.data[0] : event.data);
-    }
-  }
+ onRowSelectHandler(event: any) {
+  this.selectedItem = event;
+  this.selectionChange.emit(this.selectedItem);
+}
 }

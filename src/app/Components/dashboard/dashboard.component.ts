@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 })
 export class DashboardComponent {
   formGroup!: FormGroup;
-
+  asdsa;
   stateOptions: any[] = [
       { label: 'Semana', value: 'semana' },
       { label: 'Mes', value: 'mes' }
@@ -27,7 +27,9 @@ export class DashboardComponent {
           time: new FormControl('semana')
       });
   }
-  handleRowClick(a:any){
-    
+  onRowSeleccionado(row: any) {
+    console.log('Desde el padre seleccionaste:', row.data);
+    this.asdsa = row.data;
+    // Aquí haces lo que quieras con la fila seleccionada
   }
 }

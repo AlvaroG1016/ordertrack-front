@@ -4,9 +4,11 @@
 <!-- MeterGroup ocupa el espacio -->
 <div class="w-full h-full">
   <p-metergroup
-    [value]="value"
+    [value]="data"
     labelPosition="end"
     labelOrientation="vertical"
     class="w-full h-full text-gray-500"
+    *ngIf="data!= null"
+    
   />
 </div>

@@ -10,15 +10,15 @@
     [loading]="loading"
     [rowsPerPageOptions]="[10, 20, 50]"
     [dataKey]="dataKey"
-    [selectionMode]="selectionMode"
     [rowHover]="true"
-    (onRowSelect)="onRowSelectHandler($event)"
     currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
     [showCurrentPageReport]="true"
     [responsive]="true"
     [scrollable]="true"
     scrollHeight="35vh"
-    
+    [(selection)]="selectedItem"
+    selectionMode="single"
+    (onRowSelect)="onRowSelectHandler($event)"
   >
     <!-- CAPTION -->
     <ng-template #caption>
@@ -39,27 +39,32 @@
     <!-- HEADER -->
     <ng-template pTemplate="header">
       <tr>
+        <th></th> <!-- Columna para el radio button -->
         @for (col of columns; track $index) {
-        @if (col.sortable) {
-        <th [pSortableColumn]="col.field">
-          <div class="flex align-items-center">
-            {{ col.header }}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
-          </div>
-        </th>
-        }@else {
-        <th>
-          <div class="flex align-items-center">
-            {{ col.header }}
-          </div>
-        </th>
-        } }
+          @if (col.sortable) {
+            <th [pSortableColumn]="col.field">
+              <div class="flex align-items-center">
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </div>
+            </th>
+          } @else {
+            <th>
+              <div class="flex align-items-center">
+                {{ col.header }}
+              </div>
+            </th>
+          }
+        }
       </tr>
     </ng-template>
 
     <!-- BODY -->
     <ng-template pTemplate="body" let-row>
       <tr>
+        <td>
+          <p-tableRadioButton [value]="row" />
+        </td>
         <td *ngFor="let col of columns">
           {{ row[col.field] }}
         </td>
@@ -69,7 +74,7 @@
     <!-- EMPTY MESSAGE -->
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td [attr.colspan]="columns.length" class="text-center">
+        <td [attr.colspan]="columns.length + 1" class="text-center">
           No se encontraron resultados.
         </td>
       </tr>
